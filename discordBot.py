@@ -18,6 +18,8 @@ tracker = {
 
 def create(msg):
     newTracker = msg.split(">create", 1)[1]
+    if len(newTracker) == 0:
+        return "You didnt give the tracker a name silly"
     if newTracker not in tracker:
         tracker[newTracker] = 1
         return f"New Tracker made, {newTracker} = {tracker[newTracker]}"

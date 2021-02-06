@@ -8,7 +8,12 @@ load_dotenv()
 client = discord.Client()
 TOKEN = os.getenv("TOKEN")
 
-tracker = {}
+tracker = {
+    "aj being too hot": 1000,
+    "aj being too cold": 10,
+    "alex's dead horses": 3,
+    "times dom noticed the new bot": 1,
+}
 
 
 def showOne(msg):
@@ -21,8 +26,6 @@ def showOne(msg):
 
 def create(msg):
     newTracker = msg.split(">create ", 1)[1]
-    if ">" in newTracker:
-        return "> is not a valid character"
     if len(newTracker) == 0:
         return "You didnt give the tracker a name silly"
     if newTracker not in tracker:
@@ -57,15 +60,6 @@ def remove(msg):
         return "That Tracker doesn't exist"
 
 
-def delete(msg):
-    one = msg.split(">delete ", 1)[1]
-    try:
-        del tracker[one]
-        return f"{one} tracker deleted"
-    except:
-        return "That tracker doesn't exist"
-
-
 @client.event
 async def on_ready():
     print("bot is ready")
@@ -89,10 +83,6 @@ async def on_message(message):
     if msg.startswith(">remove"):
         total = remove(msg)
         await message.channel.send(total)
-
-    if msg.startswith(">delete"):
-        deleteMessage = delete(msg)
-        await message.channel.send(deleteMessage)
 
     if msg.startswith(">show all"):
         for keys in tracker:

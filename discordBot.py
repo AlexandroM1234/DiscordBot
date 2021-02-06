@@ -12,7 +12,7 @@ tracker = {}
 
 
 def showOne(msg):
-    one = msg.split(">show ", 1)[1]
+    one = msg.split(">show one", 1)[1]
     try:
         return f"{one} = {tracker[one]}"
     except:
@@ -78,7 +78,7 @@ async def on_message(message):
         newTracker = create(msg)
         await message.channel.send(newTracker)
 
-    if msg.startswith(">show"):
+    if msg.startswith(">show one"):
         singleTracker = showOne(msg)
         await message.channel.send(singleTracker)
 

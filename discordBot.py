@@ -36,13 +36,25 @@ def create(msg):
         f"That tracker is already made, {newTracker} = {tracker[newTracker]}"
 
 
-def update(msg):
-    text = msg.split(">update ", 1)[1]
+def add(msg):
+    text = msg.split(">add ", 1)[1]
     val = [int(char) for char in text.split() if char.isdigit()][0]
     key = " ".join(text.split(str(val), 1)[0].rsplit())
 
     try:
         tracker[key] += val
+        return f"{key} = {tracker[key]}"
+    except:
+        return "That Tracker doesn't exist"
+
+
+def remove(msg):
+    text = msg.split(">remove ", 1)[1]
+    val = [int(char) for char in text.split() if char.isdigit()][0]
+    key = " ".join(text.split(str(val), 1)[0].rsplit())
+
+    try:
+        tracker[key] -= val
         return f"{key} = {tracker[key]}"
     except:
         return "That Tracker doesn't exist"
@@ -64,9 +76,13 @@ async def on_message(message):
         singleTracker = showOne(msg)
         await message.channel.send(singleTracker)
 
-    if msg.startswith(">update"):
-        updates = update(msg)
-        await message.channel.send(updates)
+    if msg.startswith(">add"):
+        total = add(msg)
+        await message.channel.send(total)
+
+    if msg.startswith(">remove"):
+        total = remove(msg)
+        await message.channel.send(total)
 
     if msg.startswith(">show all"):
         for keys in tracker:

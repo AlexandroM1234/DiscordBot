@@ -1,4 +1,0 @@
-git+https://github.com/Rapptz/discord.py
-os
-dotenv
-PyNaCl==1.3.0

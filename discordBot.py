@@ -1,12 +1,13 @@
 import discord
-import os
-from discord.ext import commands
-from dotenv import load_dotenv
 
-load_dotenv()
+
+def read_token():
+    with open("token.txt", "r") as f:
+        lines = f.readlines()
+        return lines[0].strip()
+
 
 client = discord.Client()
-TOKEN = os.getenv("TOKEN")
 
 tracker = {
     "aj being too hot": 1000,
@@ -89,4 +90,5 @@ async def on_message(message):
             await message.channel.send(f"{keys} = {tracker[keys]}")
 
 
-client.run(TOKEN)
+token = read_token()
+client.run(token)

@@ -1,10 +1,12 @@
 # The StatTrak Bot
 
-## A simple StatTrak bot for all of your tracking needs
+### A simple StatTrak bot for all of your tracking needs
 
-## Funcionality
+## Functionality
 
-### All inputs will be via Discord text chat
+- All inputs will be via Discord text chat
+
+- Note all numbers have to be positive
 
 ```txt
 -Create a Tracker
@@ -25,3 +27,9 @@
 -Show all trackers
 >show all
 ```
+
+### Build Progress
+
+- Currently functionality for the bot is 99% done just needs more testing
+
+- A data base needs to be made so data is persistent

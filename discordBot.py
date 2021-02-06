@@ -16,8 +16,16 @@ tracker = {
 }
 
 
+def showOne(msg):
+    one = msg.split(">show ", 1)[1]
+    try:
+        return f"{one} = {tracker[one]}"
+    except:
+        return "That tracker doesn't exist"
+
+
 def create(msg):
-    newTracker = msg.split(">create", 1)[1]
+    newTracker = msg.split(">create ", 1)[1]
     if len(newTracker) == 0:
         return "You didnt give the tracker a name silly"
     if newTracker not in tracker:
@@ -39,6 +47,10 @@ async def on_message(message):
     if msg.startswith(">create"):
         newTracker = create(msg)
         await message.channel.send(newTracker)
+
+    if msg.startswith(">show"):
+        singleTracker = showOne(msg)
+        await message.channel.send(singleTracker)
 
     if msg.startswith(">show all"):
         for keys in tracker:

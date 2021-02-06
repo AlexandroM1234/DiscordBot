@@ -36,6 +36,18 @@ def create(msg):
         f"That tracker is already made, {newTracker} = {tracker[newTracker]}"
 
 
+def update(msg):
+    text = msg.split(">update ", 1)[1]
+    val = [int(char) for char in text.split() if char.isdigit()][0]
+    key = " ".join(text.split(str(val), 1)[0].rsplit())
+
+    try:
+        tracker[key] += val
+        return f"{key} = {tracker[key]}"
+    except:
+        return "That Tracker doesn't exist"
+
+
 @client.event
 async def on_ready():
     print("bot is ready")
@@ -51,6 +63,10 @@ async def on_message(message):
     if msg.startswith(">show"):
         singleTracker = showOne(msg)
         await message.channel.send(singleTracker)
+
+    if msg.startswith(">update"):
+        updates = update(msg)
+        await message.channel.send(updates)
 
     if msg.startswith(">show all"):
         for keys in tracker:
